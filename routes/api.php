@@ -28,7 +28,7 @@ Route::get('public-account/id-personal/{idPersonal}/periodo/{periodo}', 'API\Pub
 
 Route::get('tipo-auditoria', 'API\TipoAuditoriaController@TipoAuditoria');
 
-Route::get('ramos-fondo', 'API\RamosFondoController@RamosFondo');
+Route::get('ramos-fondo/cta-public/{refCtaPublica}/tipo-auditoria/{refTipoAuditoria}', 'API\RamosFondoController@RamosFondo');
 
 Route::get('ente-auditable/cta-auditable/{refCtaPublica}', 'API\EnteAuditableController@EnteAuditable');
 
