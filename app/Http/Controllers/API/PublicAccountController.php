@@ -32,7 +32,7 @@ class PublicAccountController extends Controller
                 array_push($array, VCatCtaPublica::where('IDCTAPUBLICA',$item['REFCTAPUBLICA'])->get());
             }
         }
-        
+        //TODO: Revisar cuando el usuario es administrador con conchita!!!
         return response()->json($array); 
     } 
 }

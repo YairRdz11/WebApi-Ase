@@ -39,3 +39,4 @@ Route::get('procedimiento/nivel-dos/ramo-fondo/{refRamoFondo}/ejercicio/{ejercic
 Route::get('procedimiento/nivel-tres/ramo-fondo/{refRamoFondo}/ejercicio/{ejercicio}/procedimiento/{refProcedimiento}', 'API\CatProcedimientoController@CatProcedimientoNivel3');
 
 Route::get('resultado/Aditoria/{idAuditoria}/procedimiento/{refProcedimiento}', 'API\ResultadoXAuditoriaController@ResultadoXAuditoria');
+Route::post('resultado/Aditoria/{idAuditoria}/procedimiento/{refProcedimiento}', 'API\ResultadoXAuditoriaController@InsertaResultadoXAuditoria');
