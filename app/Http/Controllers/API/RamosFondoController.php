@@ -13,7 +13,7 @@ class RamosFondoController extends Controller
         $ramosFondoList = VRamosFondo::where('ACTIVO', 1)
             ->where('REFCTAPUBLICA', $refCtaPublica)
             ->where('VISIBLEOBRAS', 1)
-            ->where('RETIPOFAUDITORIA', $refTipoAuditoria)
+            ->where('REFTIPOAUDITORIA', $refTipoAuditoria)
             ->get();
         return response()->json($ramosFondoList); 
     }
