@@ -8,5 +8,7 @@ class VResultadoXAuditoria extends Model
 {
     protected $table = 'VRESULTADOXAUDITORIA';
 
+    //protected $hidden = ['NIVEL', 'OBSERVACION', 'MUESTRATITULO', 'MUESTRADETALLE', 'MUESTRAANEXO', 'ACTIVA'];
+
     public $timestamps = false;
 }
