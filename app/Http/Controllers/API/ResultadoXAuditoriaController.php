@@ -37,4 +37,14 @@ class ResultadoXAuditoriaController extends Controller
 
         response()->json(['success' => 'success'], 200);
     }
+
+    public function InsertaResultadoAdicional($idResultado, Request $request){
+        $blob = $request->ARCHIVO;
+        $file = base64_encode(file_get_contents($blob->getRealPath()));
+        $nameFile = $blob->getClientOriginalName();
+        DB::select('EXECUTE PROCEDURE RESULTADOADICIONAL_I(?,?,?)',
+            [$idResultado, $nameFile, $file]);
+
+        response()->json(['success' => 'success'], 200);
+    }
 }
