@@ -17,12 +17,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::post('login', 'API\UserController@login');
-Route::post('register', 'API\UserController@register');
-Route::group(['middleware' => 'auth:api'], function(){
-Route::post('details', 'API\UserController@details');
+Route::post('auth/login', 'API\UserController@login');
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('user', 'API\UserController@getAuthUser');
 });
+
+// Route::post('login', 'API\UserController@login');
+// Route::post('register', 'API\UserController@register');
+// Route::group(['middleware' => 'auth:api'], function(){
+// Route::post('details', 'API\UserController@details');
+// });
 
 Route::get('public-account/id-personal/{idPersonal}/periodo/{periodo}', 'API\PublicAccountController@PublicAccount');
 
