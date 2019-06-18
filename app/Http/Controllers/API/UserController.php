@@ -23,7 +23,7 @@ class UserController extends Controller
            
             $personal = PERSONAL::where('IDPERSONAL',$res[0]->PIDPERSONAL)->get();
             // add a custom claim with a key of `foo` and a value of ['bar' => 'baz']
-            $payload = JWTFactory::sub(123)->aud('personal')->personal(['IDPERSONAL' => $personal[0]->IDPERSONAL], 
+            $payload = JWTFactory::sub($personal[0]->IDPERSONAL)->aud('personal')->personal(['IDPERSONAL' => $personal[0]->IDPERSONAL], 
                 ['NOMBRECORTO' => $personal[0]->NOMBRECORTO], ['IDPUESTO' => $personal[0]->IDPUESTO], 
                 ['IDAREA' => $personal[0]->IDAREA])->make();
 
@@ -37,8 +37,8 @@ class UserController extends Controller
     }
 
     public function getAuthUser(Request $request){
-        $user = JWTAuth::toUser($request->token);
-        return response()->json(['result' => $user]);
+        //$user = JWTAuth::toUser($request->token);
+        return response()->json();
     }
 
     /** 
