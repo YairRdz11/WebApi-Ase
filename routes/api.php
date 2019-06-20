@@ -20,8 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('auth/login', 'API\UserController@login');
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('user', 'API\UserController@getAuthUser');
-    Route::get('public-account/id-personal/{idPersonal}/periodo/{periodo}', 'API\PublicAccountController@PublicAccount');
-    Route::get('tipo-auditoria', 'API\TipoAuditoriaController@TipoAuditoria');
+    
+    
     Route::get('ramos-fondo/cta-public/{refCtaPublica}/tipo-auditoria/{refTipoAuditoria}', 'API\RamosFondoController@RamosFondo');
     Route::get('ente-auditable/cta-auditable/{refCtaPublica}', 'API\EnteAuditableController@EnteAuditable');
     Route::get('procedimiento/nivel-uno/ramo-fondo/{refRamoFondo}/ejercicio/{ejercicio}', 'API\CatProcedimientoController@CatProcedimiento');
@@ -32,3 +32,6 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::put('resultado/{idResultado}', 'API\ResultadoXAuditoriaController@ActualizadoResultadoXAuditoria');
     Route::post('resultado-adicional/{idResultado}', 'API\ResultadoXAuditoriaController@InsertaResultadoAdicional');
 });
+
+Route::get('tipo-auditoria', 'API\TipoAuditoriaController@TipoAuditoria');
+Route::get('public-account/id-personal/{idPersonal}/periodo/{periodo}', 'API\PublicAccountController@PublicAccount');
