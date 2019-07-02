@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('auth/login', 'API\UserController@login');
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('user', 'API\UserController@getAuthUser');
+    Route::post('auth/logout', 'API\UserController@logout');
 
     Route::get('tipo-auditoria', 'API\TipoAuditoriaController@TipoAuditoria');
     Route::get('tipo-auditoria/{auditoriaId}', 'API\TipoAuditoriaController@GetClaveAuditoria');
