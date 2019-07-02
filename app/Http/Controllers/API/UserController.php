@@ -29,7 +29,7 @@ class UserController extends Controller
 
             $token = JWTAuth::encode($payload);
             // all good so return the token
-            return ['HTTP_Authorization' => "Bearer {$token}"];
+            return ['token' => "Bearer {$token}", 'idPersona' => $res[0]->PIDPERSONAL];
         } 
         else{ 
             return response()->json(['error'=>'Unauthorised'], 401); 

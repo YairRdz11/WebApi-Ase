@@ -50,4 +50,11 @@ class ResultadoXAuditoriaController extends Controller
 
         response()->json(['success' => 'success'], 200);
     }
+
+
+    public function GetResultadoXId($idResultado){
+        $resultadoXAuditoria = VResultadoXAuditoria::where('IDRESULTADOAUDITORIA', $idResultado)->get();
+
+        return response()->json($resultadoXAuditoria); 
+    }
 }

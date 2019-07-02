@@ -10,5 +10,5 @@ class CatTipoAuditoria extends Model
 
     public $timestamps = false;
 
-    protected $hidden = ['ACTIVO', 'INICIAL', 'DIVAREAS', 'DESCRIPCION_LARGA'];
+    protected $hidden = ['ACTIVO', 'INICIAL', 'DIVAREAS'];
 }
