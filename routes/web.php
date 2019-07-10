@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    View::addExtension('html', 'php');
+    return View::make('index');
 });
