@@ -3,8 +3,6 @@
 namespace App;
 use Firebird\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Model;
-
 class VAuditoria extends Model
 {
     protected $table = 'VAUDITORIAS';
