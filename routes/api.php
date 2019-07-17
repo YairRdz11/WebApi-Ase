@@ -27,6 +27,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('public-account/id-personal/{idPersonal}/periodo/{periodo}', 'API\PublicAccountController@PublicAccount');
     Route::get('ente-auditable/cta-auditable/{refCtaPublica}', 'API\EnteAuditableController@EnteAuditable');
     Route::get('ramos-fondo/cta-public/{refCtaPublica}/tipo-auditoria/{refTipoAuditoria}', 'API\RamosFondoController@RamosFondo');
+    Route::get('auditoria/ente/{refEnte}/ejercicio/{ejercicio}ramo-fondo/{refRamoFondo}/tipo-auditoria/{refTipoAuditoria}', 'API\AuditoriaController@Auditoria');
 
     Route::post('resultado-adicional/{idResultado}', 'API\ResultadoXAuditoriaController@InsertaResultadoAdicional');
     Route::get('procedimiento/nivel-uno/ramo-fondo/{refRamoFondo}/ejercicio/{ejercicio}', 
