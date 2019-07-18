@@ -14,11 +14,4 @@ class TipoAuditoriaController extends Controller
         $tipoAuditoriaList = CatTipoAuditoria::where('ACTIVO', 1)->get();
         return response()->json($tipoAuditoriaList); 
     }
-    
-    public function GetClaveAuditoria($auditoriaId){
-        $auditoria = CatTipoAuditoria::where('IDTIPOAUDITORIA', $auditoriaId)
-            ->where('ACTIVO', 1)
-            ->get();
-        return response()->json($auditoria); 
-    }
 }

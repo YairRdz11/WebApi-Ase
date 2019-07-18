@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use App\VAuditoria;
+use App\FondoXPlaneacion;
 
 class AuditoriaController extends Controller
 {
@@ -21,5 +22,11 @@ class AuditoriaController extends Controller
             ->get();
 
         return response()->json($auditoria); 
+    }
+
+    public function GetClaveAuditoria($auditoriaId){
+        $auditoriaClave = FondoXPlaneacion::where('REFAUDITORIA ', $auditoriaId)
+            ->get();
+        return response()->json($auditoriaClave); 
     }
 }
