@@ -10,7 +10,10 @@ use App\VResultadoXAuditoria;
 class ResultadoXAuditoriaController extends Controller
 {
     public function ResultadoXAuditoria($idAuditoria, $refProcedimiento){
-        $resultadosXAuditoriaList = VResultadoXAuditoria::where('REFAUDITORIA', $idAuditoria)
+        $resultadosXAuditoriaList = VResultadoXAuditoria::select('VRESULTADOXAUDITORIA.*', 
+                                    DB::raw('(CASE WHEN RESULTADOADICIONAL.IDRESULTADOADICIONAL IS NOT NULL AND RESULTADOADICIONAL.IDRESULTADOADICIONAL <> 0 THEN \'Si\' ELSE \'No\' END) AS ARCHIVO'))
+            ->leftJoin('RESULTADOADICIONAL', 'RESULTADOADICIONAL.REFRESULTADOXAUDITORIA', '=', 'VRESULTADOXAUDITORIA.IDRESULTADOAUDITORIA')
+            ->where('REFAUDITORIA', $idAuditoria)
             ->where('REFPROCEDIMIENTO', $refProcedimiento)
             ->where('IDRESULTADOAUDITORIA', '>' ,0)
             ->get();
