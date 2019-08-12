@@ -30,6 +30,8 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('auditoria/ente/{refEnte}/ejercicio/{ejercicio}ramo-fondo/{refRamoFondo}/tipo-auditoria/{refTipoAuditoria}', 'API\AuditoriaController@Auditoria');
 
     Route::post('resultado-adicional/{idResultado}', 'API\ResultadoXAuditoriaController@InsertaResultadoAdicional');
+    Route::delete('resultado-adicional/{idResultadoAdicional}', 'API\ResultadoXAuditoriaController@EliminarResultadoAdicional');
+
     Route::get('procedimiento/nivel-uno/ramo-fondo/{refRamoFondo}/ejercicio/{ejercicio}', 
                 'API\CatProcedimientoController@CatProcedimiento');
     Route::get('procedimiento/nivel-dos/ramo-fondo/{refRamoFondo}/ejercicio/{ejercicio}/procedimiento/{refProcedimiento}', 

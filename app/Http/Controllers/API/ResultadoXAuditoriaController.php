@@ -11,7 +11,8 @@ class ResultadoXAuditoriaController extends Controller
 {
     public function ResultadoXAuditoria($idAuditoria, $refProcedimiento){
         $resultadosXAuditoriaList = VResultadoXAuditoria::select('VRESULTADOXAUDITORIA.*', 
-                                    DB::raw('(CASE WHEN RESULTADOADICIONAL.IDRESULTADOADICIONAL IS NOT NULL AND RESULTADOADICIONAL.IDRESULTADOADICIONAL <> 0 THEN \'Si\' ELSE \'No\' END) AS ARCHIVO'))
+                                    DB::raw('(CASE WHEN RESULTADOADICIONAL.IDRESULTADOADICIONAL IS NOT NULL AND RESULTADOADICIONAL.IDRESULTADOADICIONAL <> 0 THEN \'Si\' ELSE \'No\' END) AS ARCHIVO'),
+                                    'RESULTADOADICIONAL.NOMBREARCHIVO', 'RESULTADOADICIONAL.IDRESULTADOADICIONAL')
             ->leftJoin('RESULTADOADICIONAL', 'RESULTADOADICIONAL.REFRESULTADOXAUDITORIA', '=', 'VRESULTADOXAUDITORIA.IDRESULTADOAUDITORIA')
             ->where('REFAUDITORIA', $idAuditoria)
             ->where('REFPROCEDIMIENTO', $refProcedimiento)
@@ -49,15 +50,22 @@ class ResultadoXAuditoriaController extends Controller
         // $file = stream_get_contents($fd, -1, 10);
         // fclose($fd);
         $nameFile = $blob->getClientOriginalName();
-        DB::select('EXECUTE PROCEDURE RESULTADOADICIONAL_I(?,?,?)',
-            [$idResultado, $nameFile, $file]);
+        DB::select('EXECUTE PROCEDURE RESULTADOADICIONAL_I(?,?,?,?)',
+            [$idResultado, $nameFile, $file, 1]);
 
         response()->json(['success' => 'success'], 200);
     }
 
+    public function EliminarResultadoAdicional($idResultadoAdicional){
+        DB::select('EXECUTE PROCEDURE RESULTADOADICIONAL_E(?)',[$idResultadoAdicional]);
+        response()->json(['success' => 'success'], 200);
+    }
 
     public function GetResultadoXId($idResultado){
-        $resultadoXAuditoria = VResultadoXAuditoria::where('IDRESULTADOAUDITORIA', $idResultado)->get();
+        $resultadoXAuditoria = VResultadoXAuditoria::select('VRESULTADOXAUDITORIA.*', 'RESULTADOADICIONAL.NOMBREARCHIVO')
+            ->leftJoin('RESULTADOADICIONAL', 'RESULTADOADICIONAL.REFRESULTADOXAUDITORIA', '=', 'VRESULTADOXAUDITORIA.IDRESULTADOAUDITORIA')
+            ->where('IDRESULTADOAUDITORIA', $idResultado)
+            ->get();
 
         return response()->json($resultadoXAuditoria); 
     }
