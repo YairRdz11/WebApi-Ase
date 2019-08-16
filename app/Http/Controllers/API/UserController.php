@@ -18,8 +18,8 @@ class UserController extends Controller
 
     public function login(Request $request){
         $res = DB::select('EXECUTE PROCEDURE USUARIOVALIDO(?,?,?,?)',
-            [$request->usuario, $request->contrasena, 30, 'WEB']);
-        if($res > 0){ 
+            [strtoupper($request->usuario), $request->contrasena, 30, 'WEB']);
+        if($res[0]->PIDPERSONAL > 0){ 
            
             $personal = PERSONAL::where('IDPERSONAL',$res[0]->PIDPERSONAL)->get();
             // add a custom claim with a key of `foo` and a value of ['bar' => 'baz']
