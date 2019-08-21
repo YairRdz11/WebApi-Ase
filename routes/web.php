@@ -16,3 +16,9 @@ Route::get('/', function () {
     View::addExtension('html', 'php');
     return View::make('index');
 });
+
+Route::any('{path?}', function()
+{
+    View::addExtension('html', 'php');
+    return View::make('index');
+})->where("path", ".+");

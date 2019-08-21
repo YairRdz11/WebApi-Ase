@@ -43,12 +43,11 @@ class ResultadoXAuditoriaController extends Controller
     }
 
     public function InsertaResultadoAdicional($idResultado, Request $request){
-        $blob = $request->ARCHIVO;
+        //$blob = $request->ARCHIVO;
+        $blob =  $request->file('ARCHIVO');
        
         $file = base64_encode(file_get_contents($blob->getRealPath()));
-        // $fd = fopen($blob, 'r');
-        // $file = stream_get_contents($fd, -1, 10);
-        // fclose($fd);
+        //$file = base64_encode(file_get_contents($blob->getClientOriginalName()));
         $nameFile = $blob->getClientOriginalName();
         DB::select('EXECUTE PROCEDURE RESULTADOADICIONAL_I(?,?,?,?)',
             [$idResultado, $nameFile, $file, 1]);
